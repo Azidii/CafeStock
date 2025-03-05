@@ -17,9 +17,18 @@ namespace CafeStock {
 			InitializeComponent();
 			
 			// Populate the ComboBox with predefined values
-			this->cmbItemType->Items->Add("Utensils");
-			this->cmbItemType->Items->Add("Meat");
-			this->cmbItemType->Items->Add("Drink");
+			this->cmbItemType->Items->Add("Beverage");
+			this->cmbItemType->Items->Add("Snacks");
+			this->cmbItemType->Items->Add("Fruits");
+			this->cmbItemType->Items->Add("Dairy Products");
+			this->cmbItemType->Items->Add("Bakery Items");
+			this->cmbItemType->Items->Add("Main Courses");
+			this->cmbItemType->Items->Add("Frozen Foods");
+			this->cmbItemType->Items->Add("Vegetables");
+			this->cmbItemType->Items->Add("Condiments & Sauces");
+			this->cmbItemType->Items->Add("Disposable Items");
+			this->cmbItemType->Items->Add("Specialty Items");
+			this->cmbItemType->Items->Add("Cleaning Supplies");
 
 			// Set default selection (optional)
 			this->cmbItemType->SelectedIndex = 0;
