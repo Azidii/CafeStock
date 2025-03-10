@@ -38,7 +38,21 @@ namespace CafeStock {
 			//txtQuantity->Text = itemQuantity;
 
 			//LoadItemDetails();
-			cmbItemType->Items->AddRange(gcnew cli::array<String^> { "Utensils", "Meat", "Drink", "Food" });
+			cmbItemType->Items->AddRange(gcnew cli::array<String^> {
+				"Beverages",       // Coffee, Tea, Soft Drinks, Juice, Milk, Water
+					"Snacks",          // Chips, Cookies, Muffins, Candy, Nuts
+					"Fruits",          // Apples, Bananas, Oranges, Berries, Grapes
+					"Dairy Products",  // Milk, Cheese, Yogurt, Butter, Cream
+					"Bakery Items",    // Bread, Croissants, Bagels, Pastries, Donuts
+					"Main Courses",    // Sandwiches, Wraps, Pizzas, Salads, Pasta, Soups
+					"Frozen Foods",    // Ice Cream, Frozen Meals, Frozen Vegetables
+					"Vegetables",      // Leafy Greens, Carrots, Potatoes, Peppers, Tomatoes
+					"Condiments & Sauces",  // Ketchup, Mustard, Mayonnaise, Hot Sauce, Salad Dressings
+					"Disposable Items",     // Paper Cups, Paper Plates, Napkins, Plastic Cutlery, Straws
+					"Specialty Items",      // Gluten-Free Products, Vegan Products, Organic Items
+					"Cleaning Supplies"     // Dish Soap, Sanitizers, Sponges, Trash Bags
+			});
+
 			this->itemID = passedItemID;
 			LoadItemDetails();
 		}

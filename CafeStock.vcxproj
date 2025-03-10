@@ -125,6 +125,7 @@
     <ClCompile Include="AdminUsers.cpp" />
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="EditInventory.cpp" />
+    <ClCompile Include="EditUser.cpp" />
     <ClCompile Include="HistoryControll.cpp" />
     <ClCompile Include="InventoryMenu.cpp" />
     <ClCompile Include="MainLogin.cpp" />
@@ -143,6 +144,9 @@
       <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="EditInventory.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="EditUser.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="HistoryControll.h">
@@ -176,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditInventory.resx">
       <DependentUpon>EditInventory.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditUser.resx">
+      <DependentUpon>EditUser.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HistoryControll.resx">
       <DependentUpon>HistoryControll.h</DependentUpon>

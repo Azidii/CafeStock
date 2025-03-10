@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include "EditUser.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -44,6 +44,8 @@ namespace CafeStock {
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 	private: System::Windows::Forms::Label^ lblUserCount;
 	private: System::Windows::Forms::Button^ txtRemoveUsers;
+	private: System::Windows::Forms::Button^ btnEdit;
+
 
 
 
@@ -68,6 +70,7 @@ namespace CafeStock {
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->lblUserCount = (gcnew System::Windows::Forms::Label());
 			this->txtRemoveUsers = (gcnew System::Windows::Forms::Button());
+			this->btnEdit = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
@@ -122,7 +125,7 @@ namespace CafeStock {
 			// 
 			this->txtSearch->Location = System::Drawing::Point(113, 50);
 			this->txtSearch->Name = L"txtSearch";
-			this->txtSearch->Size = System::Drawing::Size(509, 20);
+			this->txtSearch->Size = System::Drawing::Size(426, 20);
 			this->txtSearch->TabIndex = 19;
 			this->txtSearch->TextChanged += gcnew System::EventHandler(this, &AdminUsers::txtSearch_TextChanged);
 			// 
@@ -169,12 +172,27 @@ namespace CafeStock {
 			this->txtRemoveUsers->FlatAppearance->BorderSize = 0;
 			this->txtRemoveUsers->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->txtRemoveUsers->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"txtRemoveUsers.Image")));
-			this->txtRemoveUsers->Location = System::Drawing::Point(637, 42);
+			this->txtRemoveUsers->Location = System::Drawing::Point(562, 42);
 			this->txtRemoveUsers->Name = L"txtRemoveUsers";
 			this->txtRemoveUsers->Size = System::Drawing::Size(40, 40);
 			this->txtRemoveUsers->TabIndex = 24;
 			this->txtRemoveUsers->UseVisualStyleBackColor = false;
 			this->txtRemoveUsers->Click += gcnew System::EventHandler(this, &AdminUsers::txtRemoveUsers_Click);
+			// 
+			// btnEdit
+			// 
+			this->btnEdit->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->btnEdit->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->btnEdit->FlatAppearance->BorderSize = 0;
+			this->btnEdit->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnEdit->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnEdit.Image")));
+			this->btnEdit->Location = System::Drawing::Point(637, 42);
+			this->btnEdit->Name = L"btnEdit";
+			this->btnEdit->Size = System::Drawing::Size(40, 40);
+			this->btnEdit->TabIndex = 25;
+			this->btnEdit->UseVisualStyleBackColor = false;
+			this->btnEdit->Click += gcnew System::EventHandler(this, &AdminUsers::btnEdit_Click);
 			// 
 			// AdminUsers
 			// 
@@ -182,6 +200,7 @@ namespace CafeStock {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->Controls->Add(this->btnEdit);
 			this->Controls->Add(this->txtRemoveUsers);
 			this->Controls->Add(this->lblUserCount);
 			this->Controls->Add(this->bttnMinimize);
@@ -200,7 +219,7 @@ namespace CafeStock {
 
 		}
 #pragma endregion
-private:
+public:
 	void LoadDataFromDatabase() {
 		String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
 		String^ query = "SELECT * FROM Users";
@@ -343,6 +362,26 @@ private: System::Void txtRemoveUsers_Click(System::Object^ sender, System::Event
 		catch (Exception^ ex) {
 			MessageBox::Show("Error deleting user: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
+	}
+}
+private: System::Void btnEdit_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	if (dataGridView1->SelectedRows->Count > 0) {
+		int selectedIndex = dataGridView1->SelectedRows[0]->Index;
+		int selectedItemID = Convert::ToInt32(dataGridView1->Rows[selectedIndex]->Cells["Id"]->Value);  // ✅ Use correct column name
+
+		String^ username = dataGridView1->Rows[selectedIndex]->Cells["username"]->Value->ToString();
+		String^ password = dataGridView1->Rows[selectedIndex]->Cells["password"]->Value->ToString();
+
+		// Open EditUser form
+		EditUser^ edituser = gcnew EditUser(selectedItemID, username, password);
+		edituser->ShowDialog();
+
+		// Refresh data after editing
+		LoadDataFromDatabase();
+	}
+	else {
+		MessageBox::Show("Please select a row to edit.");
 	}
 }
 };

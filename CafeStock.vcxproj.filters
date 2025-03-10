@@ -31,6 +31,9 @@
     <ClCompile Include="EditInventory.cpp">
       <Filter>Methods</Filter>
     </ClCompile>
+    <ClCompile Include="EditUser.cpp">
+      <Filter>AdminMenu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdminMenu.h">
@@ -47,6 +50,9 @@
     <ClInclude Include="Menumain.h" />
     <ClInclude Include="PopupEdit.h" />
     <ClInclude Include="Register.h" />
+    <ClInclude Include="EditUser.h">
+      <Filter>AdminMenu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Methods">
