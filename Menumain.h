@@ -125,9 +125,8 @@ namespace CafeStock {
 			this->flowLayoutPanel1->Font = (gcnew System::Drawing::Font(L"Segoe MDL2 Assets", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->flowLayoutPanel1->Location = System::Drawing::Point(0, 0);
-			this->flowLayoutPanel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-			this->flowLayoutPanel1->Size = System::Drawing::Size(289, 670);
+			this->flowLayoutPanel1->Size = System::Drawing::Size(217, 544);
 			this->flowLayoutPanel1->TabIndex = 0;
 			this->flowLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Menumain::flowLayoutPanel1_Paint);
 			// 
@@ -135,10 +134,9 @@ namespace CafeStock {
 			// 
 			this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(4, 4);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->pictureBox1->Location = System::Drawing::Point(3, 3);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(285, 121);
+			this->pictureBox1->Size = System::Drawing::Size(214, 98);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
@@ -147,10 +145,9 @@ namespace CafeStock {
 			// 
 			this->panel5->BackColor = System::Drawing::Color::Transparent;
 			this->panel5->Controls->Add(this->button5);
-			this->panel5->Location = System::Drawing::Point(4, 133);
-			this->panel5->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel5->Location = System::Drawing::Point(3, 107);
 			this->panel5->Name = L"panel5";
-			this->panel5->Size = System::Drawing::Size(285, 62);
+			this->panel5->Size = System::Drawing::Size(214, 50);
 			this->panel5->TabIndex = 4;
 			// 
 			// button5
@@ -164,10 +161,9 @@ namespace CafeStock {
 			this->button5->ForeColor = System::Drawing::Color::White;
 			this->button5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button5.Image")));
 			this->button5->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button5->Location = System::Drawing::Point(0, 5);
-			this->button5->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button5->Location = System::Drawing::Point(0, 4);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(285, 53);
+			this->button5->Size = System::Drawing::Size(214, 43);
 			this->button5->TabIndex = 2;
 			this->button5->Text = L"Dashboard";
 			this->button5->UseVisualStyleBackColor = false;
@@ -177,10 +173,9 @@ namespace CafeStock {
 			// 
 			this->panel1->BackColor = System::Drawing::Color::Transparent;
 			this->panel1->Controls->Add(this->button1);
-			this->panel1->Location = System::Drawing::Point(4, 203);
-			this->panel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel1->Location = System::Drawing::Point(3, 163);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(285, 62);
+			this->panel1->Size = System::Drawing::Size(214, 50);
 			this->panel1->TabIndex = 5;
 			// 
 			// button1
@@ -194,10 +189,9 @@ namespace CafeStock {
 			this->button1->ForeColor = System::Drawing::Color::White;
 			this->button1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.Image")));
 			this->button1->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button1->Location = System::Drawing::Point(0, 5);
-			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button1->Location = System::Drawing::Point(0, 4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(285, 53);
+			this->button1->Size = System::Drawing::Size(214, 43);
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Inventory Menu";
 			this->button1->UseVisualStyleBackColor = false;
@@ -207,10 +201,9 @@ namespace CafeStock {
 			// 
 			this->panel7->BackColor = System::Drawing::Color::Transparent;
 			this->panel7->Controls->Add(this->button7);
-			this->panel7->Location = System::Drawing::Point(4, 273);
-			this->panel7->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel7->Location = System::Drawing::Point(3, 219);
 			this->panel7->Name = L"panel7";
-			this->panel7->Size = System::Drawing::Size(285, 62);
+			this->panel7->Size = System::Drawing::Size(214, 50);
 			this->panel7->TabIndex = 7;
 			// 
 			// button7
@@ -224,10 +217,9 @@ namespace CafeStock {
 			this->button7->ForeColor = System::Drawing::Color::White;
 			this->button7->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button7.Image")));
 			this->button7->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button7->Location = System::Drawing::Point(-4, 5);
-			this->button7->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button7->Location = System::Drawing::Point(-3, 4);
 			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(289, 53);
+			this->button7->Size = System::Drawing::Size(217, 43);
 			this->button7->TabIndex = 2;
 			this->button7->Text = L"History";
 			this->button7->UseVisualStyleBackColor = false;
@@ -237,10 +229,9 @@ namespace CafeStock {
 			// 
 			this->panel8->BackColor = System::Drawing::Color::Transparent;
 			this->panel8->Controls->Add(this->button8);
-			this->panel8->Location = System::Drawing::Point(4, 343);
-			this->panel8->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel8->Location = System::Drawing::Point(3, 275);
 			this->panel8->Name = L"panel8";
-			this->panel8->Size = System::Drawing::Size(285, 62);
+			this->panel8->Size = System::Drawing::Size(214, 50);
 			this->panel8->TabIndex = 8;
 			// 
 			// button8
@@ -254,10 +245,9 @@ namespace CafeStock {
 			this->button8->ForeColor = System::Drawing::Color::White;
 			this->button8->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button8.Image")));
 			this->button8->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button8->Location = System::Drawing::Point(-4, 5);
-			this->button8->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button8->Location = System::Drawing::Point(-3, 4);
 			this->button8->Name = L"button8";
-			this->button8->Size = System::Drawing::Size(289, 53);
+			this->button8->Size = System::Drawing::Size(217, 43);
 			this->button8->TabIndex = 2;
 			this->button8->Text = L"Logout";
 			this->button8->UseVisualStyleBackColor = false;
@@ -267,10 +257,9 @@ namespace CafeStock {
 			// 
 			this->panel2->BackColor = System::Drawing::Color::Transparent;
 			this->panel2->Controls->Add(this->button2);
-			this->panel2->Location = System::Drawing::Point(4, 415);
-			this->panel2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel2->Location = System::Drawing::Point(3, 337);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(285, 62);
+			this->panel2->Size = System::Drawing::Size(214, 50);
 			this->panel2->TabIndex = 4;
 			// 
 			// button2
@@ -282,10 +271,9 @@ namespace CafeStock {
 				static_cast<System::Byte>(0)));
 			this->button2->ForeColor = System::Drawing::Color::White;
 			this->button2->ImageAlign = System::Drawing::ContentAlignment::BottomLeft;
-			this->button2->Location = System::Drawing::Point(8, 5);
-			this->button2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button2->Location = System::Drawing::Point(6, 4);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(273, 53);
+			this->button2->Size = System::Drawing::Size(205, 43);
 			this->button2->TabIndex = 2;
 			this->button2->Text = L"History";
 			this->button2->UseVisualStyleBackColor = false;
@@ -294,10 +282,9 @@ namespace CafeStock {
 			// 
 			this->panel4->BackColor = System::Drawing::Color::Transparent;
 			this->panel4->Controls->Add(this->button4);
-			this->panel4->Location = System::Drawing::Point(4, 484);
-			this->panel4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel4->Location = System::Drawing::Point(3, 393);
 			this->panel4->Name = L"panel4";
-			this->panel4->Size = System::Drawing::Size(285, 62);
+			this->panel4->Size = System::Drawing::Size(214, 50);
 			this->panel4->TabIndex = 6;
 			// 
 			// button4
@@ -310,10 +297,9 @@ namespace CafeStock {
 			this->button4->ForeColor = System::Drawing::Color::White;
 			this->button4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button4.Image")));
 			this->button4->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button4->Location = System::Drawing::Point(8, 5);
-			this->button4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button4->Location = System::Drawing::Point(6, 4);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(273, 53);
+			this->button4->Size = System::Drawing::Size(205, 43);
 			this->button4->TabIndex = 2;
 			this->button4->Text = L"Logout";
 			this->button4->UseVisualStyleBackColor = false;
@@ -327,23 +313,22 @@ namespace CafeStock {
 			// mainPanel
 			// 
 			this->mainPanel->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->mainPanel->Location = System::Drawing::Point(289, 0);
-			this->mainPanel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->mainPanel->Location = System::Drawing::Point(217, 0);
 			this->mainPanel->Name = L"mainPanel";
-			this->mainPanel->Size = System::Drawing::Size(994, 670);
+			this->mainPanel->Size = System::Drawing::Size(745, 544);
 			this->mainPanel->TabIndex = 7;
 			// 
 			// Menumain
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1283, 670);
+			this->ClientSize = System::Drawing::Size(962, 544);
 			this->Controls->Add(this->mainPanel);
 			this->Controls->Add(this->flowLayoutPanel1);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel4);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"Menumain";
 			this->Text = L"Menumain";
 			this->Load += gcnew System::EventHandler(this, &Menumain::Menumain_Load);
