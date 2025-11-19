@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+#ENVIRONMENT FILE MUST NOT GIVE OUT API KEYS!
+.env

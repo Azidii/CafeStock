@@ -1,7 +1,7 @@
 ﻿#include "PopupEdit.h"
 #include "InventoryMenu.h"
 #include "Menumain.h"
-
+#include "../EnvConfig.h"
 using namespace System::Data::SqlClient;
 
 void CafeStock::PopupEdit::UpdateInventoryCapacity() {
@@ -58,14 +58,14 @@ System::Void CafeStock::PopupEdit::bttnAdd_Click(System::Object^ sender, System:
         return;
     }
 
-    String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
+    String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
 
     try {
         SqlConnection^ con = gcnew SqlConnection(connectionString);
         con->Open();
 
         // ✅ Check total inventory capacity
-        String^ capacityQuery = "SELECT SUM(Item_Quantity) FROM tblItems";
+        String^ capacityQuery = "SELECT SUM(Item_Quantity) FROM dbo.tblItems";
         SqlCommand^ capacityCmd = gcnew SqlCommand(capacityQuery, con);
         Object^ result = capacityCmd->ExecuteScalar();
         int currentTotal = (result != nullptr && result != DBNull::Value) ? Convert::ToInt32(result) : 0;
@@ -79,7 +79,7 @@ System::Void CafeStock::PopupEdit::bttnAdd_Click(System::Object^ sender, System:
         }
 
         // ✅ Proceed with insertion if capacity is not exceeded
-        String^ query = "INSERT INTO tblItems (Item_Name, Item_Category, Item_Quantity) VALUES (@name, @type, @quantity)";
+        String^ query = "INSERT INTO dbo.tblItems (Item_Name, Item_Category, Item_Quantity) VALUES (@name, @type, @quantity)";
         SqlCommand^ cmd = gcnew SqlCommand(query, con);
 
         cmd->Parameters->AddWithValue("@name", itemName);

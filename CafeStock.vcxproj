@@ -78,7 +78,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Admin\Downloads\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Pages</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -93,6 +93,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -102,15 +104,20 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Pages</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -121,89 +128,110 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AdminMenu.cpp" />
-    <ClCompile Include="AdminUsers.cpp" />
-    <ClCompile Include="Dashboard.cpp" />
-    <ClCompile Include="EditInventory.cpp" />
-    <ClCompile Include="EditUser.cpp" />
-    <ClCompile Include="HistoryControll.cpp" />
-    <ClCompile Include="InventoryMenu.cpp" />
-    <ClCompile Include="MainLogin.cpp" />
-    <ClCompile Include="Menumain.cpp" />
-    <ClCompile Include="PopupEdit.cpp" />
-    <ClCompile Include="Register.cpp" />
+    <ClCompile Include="Methods\AdminMenu.cpp" />
+    <ClCompile Include="Methods\AdminUsers.cpp" />
+    <ClCompile Include="Methods\Dashboard.cpp" />
+    <ClCompile Include="Methods\EditInventory.cpp" />
+    <ClCompile Include="Methods\EditUser.cpp" />
+    <ClCompile Include="Methods\HistoryControll.cpp" />
+    <ClCompile Include="Methods\InventoryMenu.cpp" />
+    <ClCompile Include="Methods\MainLogin.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Methods\Menumain.cpp" />
+    <ClCompile Include="Methods\PopupEdit.cpp" />
+    <ClCompile Include="Methods\Register.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdminMenu.h">
+    <ClInclude Include="EnvConfig.h" />
+    <ClInclude Include="Pages\AdminMenu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="AdminUsers.h">
+    <ClInclude Include="Pages\AdminUsers.h">
       <FileType>CppControl</FileType>
     </ClInclude>
-    <ClInclude Include="Dashboard.h">
+    <ClInclude Include="Pages\Dashboard.h">
       <FileType>CppControl</FileType>
     </ClInclude>
-    <ClInclude Include="EditInventory.h">
+    <ClInclude Include="Pages\EditInventory.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="EditUser.h">
+    <ClInclude Include="Pages\EditUser.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="HistoryControll.h">
+    <ClInclude Include="Pages\HistoryControll.h">
       <FileType>CppControl</FileType>
     </ClInclude>
-    <ClInclude Include="InventoryMenu.h">
+    <ClInclude Include="Pages\InventoryMenu.h">
       <FileType>CppControl</FileType>
     </ClInclude>
-    <ClInclude Include="MainLogin.h">
+    <ClInclude Include="Pages\MainLogin.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Menumain.h">
+    <ClInclude Include="Pages\Menumain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="PopupEdit.h">
+    <ClInclude Include="Pages\PopupEdit.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Register.h">
+    <ClInclude Include="Pages\Register.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AdminMenu.resx">
+    <EmbeddedResource Include="Pages\AdminMenu.resx">
       <DependentUpon>AdminMenu.h</DependentUpon>
+      <LogicalName>CafeStock.AdminMenu.resources</LogicalName>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminUsers.resx">
+    <EmbeddedResource Include="Pages\AdminUsers.resx">
       <DependentUpon>AdminUsers.h</DependentUpon>
+      <LogicalName>CafeStock.AdminUsers.resources</LogicalName>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dashboard.resx">
+    <EmbeddedResource Include="Pages\Dashboard.resx">
       <DependentUpon>Dashboard.h</DependentUpon>
+      <LogicalName>CafeStock.Dashboard.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditInventory.resx">
+    <EmbeddedResource Include="Pages\EditInventory.resx">
       <DependentUpon>EditInventory.h</DependentUpon>
+      <LogicalName>CafeStock.EditInventory.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditUser.resx">
+    <EmbeddedResource Include="Pages\EditUser.resx">
       <DependentUpon>EditUser.h</DependentUpon>
+      <LogicalName>CafeStock.EditUser.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="HistoryControll.resx">
+    <EmbeddedResource Include="Pages\HistoryControll.resx">
       <DependentUpon>HistoryControll.h</DependentUpon>
+      <LogicalName>CafeStock.HistoryControll.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="InventoryMenu.resx">
+    <EmbeddedResource Include="Pages\InventoryMenu.resx">
       <DependentUpon>InventoryMenu.h</DependentUpon>
+      <LogicalName>CafeStock.InventoryMenu.resources</LogicalName>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainLogin.resx">
+    <EmbeddedResource Include="Pages\MainLogin.resx">
       <DependentUpon>MainLogin.h</DependentUpon>
+      <LogicalName>CafeStock.MainLogin.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menumain.resx">
+    <EmbeddedResource Include="Pages\Menumain.resx">
       <DependentUpon>Menumain.h</DependentUpon>
-      <SubType>Designer</SubType>
+      <LogicalName>CafeStock.Menumain.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="PopupEdit.resx">
+    <EmbeddedResource Include="Pages\PopupEdit.resx">
       <DependentUpon>PopupEdit.h</DependentUpon>
+      <LogicalName>CafeStock.PopupEdit.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Register.resx">
+    <EmbeddedResource Include="Pages\Register.resx">
       <DependentUpon>Register.h</DependentUpon>
-      <SubType>Designer</SubType>
+      <LogicalName>CafeStock.Register.resources</LogicalName>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".env" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

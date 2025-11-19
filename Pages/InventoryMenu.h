@@ -1,4 +1,5 @@
 ﻿	#pragma once
+	#include "../EnvConfig.h"
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -18,6 +19,7 @@
 				InitializeComponent();
 				LoadDataFromDatabase();
 				UpdateInventoryCapacity();
+				
 			}
 
 		protected:
@@ -262,14 +264,14 @@
 			if (dialogResult == System::Windows::Forms::DialogResult::Yes) {
 				try {
 					// Supabase REST API URL (or SQL Server connection string if using local DB)
-					String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
+					String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
 
 					// Open connection
 					SqlConnection^ conn = gcnew SqlConnection(connectionString);
 					conn->Open();
 
 					// SQL delete command
-					String^ deleteQuery = "DELETE FROM tblItems WHERE Item_ID = @ItemID";
+					String^ deleteQuery = "DELETE FROM dbo.tblItems WHERE Item_ID = @ItemID";
 					SqlCommand^ cmd = gcnew SqlCommand(deleteQuery, conn);
 					cmd->Parameters->AddWithValue("@ItemID", itemID);
 
@@ -302,8 +304,8 @@
 		}
 		public:
 			void LoadDataFromDatabase() {
-				String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
-				String^ query = "SELECT * FROM tblItems";
+				String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
+				String^ query = "SELECT * FROM dbo.tblItems";
 
 				try {
 					if (dataGridView1 == nullptr) {
@@ -313,25 +315,32 @@
 
 					SqlConnection^ con = gcnew SqlConnection(connectionString);
 					con->Open();
+
 					SqlDataAdapter^ adapter = gcnew SqlDataAdapter(query, con);
 					DataTable^ dt = gcnew DataTable();
 					adapter->Fill(dt);
+
 					dataTable = dt;
 					dataGridView1->DataSource = dataTable->DefaultView;
 					con->Close();
 
-					if (dataGridView1->Columns->Contains("Item_Name")) {
+					// Safely set column headers only if the columns exist
+					if (dataGridView1->Columns->Contains("Item_Name"))
 						dataGridView1->Columns["Item_Name"]->HeaderText = "Item Name";
-					}
-					if (dataGridView1->Columns->Contains("Item_Category")) {
-						dataGridView1->Columns["Item_Category"]->HeaderText = "Item Type";
-					}
-					if (dataGridView1->Columns->Contains("Item_Quantity")) {
-						dataGridView1->Columns["Item_Quantity"]->HeaderText = "Quantity";
-					}
 
-					dataGridView1->Columns["Item_ID"]->Visible = false;
-					dataGridView1->Columns["Date_Modified"]->Visible = false;
+					if (dataGridView1->Columns->Contains("Item_Category"))
+						dataGridView1->Columns["Item_Category"]->HeaderText = "Item Type";
+
+					if (dataGridView1->Columns->Contains("Item_Quantity"))
+						dataGridView1->Columns["Item_Quantity"]->HeaderText = "Quantity";
+
+					if (dataGridView1->Columns->Contains("Item_ID"))
+						dataGridView1->Columns["Item_ID"]->Visible = false;
+
+					if (dataGridView1->Columns->Contains("Date_Modified"))
+						dataGridView1->Columns["Date_Modified"]->Visible = false;
+
+					// Apply styling safely
 					dataGridView1->EnableHeadersVisualStyles = false;
 					dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::Silver;
 					dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::Black;
@@ -340,8 +349,11 @@
 					dataGridView1->ColumnHeadersDefaultCellStyle->SelectionBackColor = System::Drawing::Color::Silver;
 					dataGridView1->ColumnHeadersDefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
 
-					// ✅ Call UpdateInventoryCapacity after loading data
-					UpdateInventoryCapacity();
+					// ✅ Call UpdateInventoryCapacity after loading data, but check it's valid
+					if (dataTable != nullptr && dataTable->Rows->Count > 0)
+						UpdateInventoryCapacity();
+					else
+						MessageBox::Show("There are no Items as of the Moment!, Capacity Check Skipped");
 				}
 				catch (SqlException^ ex) {
 					MessageBox::Show("Database error: " + ex->Message);

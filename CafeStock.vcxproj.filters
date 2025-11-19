@@ -1,65 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <ClCompile Include="HistoryControll.cpp">
-      <Filter>Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="Register.cpp">
-      <Filter>Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="MainLogin.cpp">
-      <Filter>Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="Dashboard.cpp">
-      <Filter>Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="InventoryMenu.cpp">
-      <Filter>Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="Menumain.cpp">
-      <Filter>Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="PopupEdit.cpp">
-      <Filter>Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="AdminMenu.cpp">
-      <Filter>AdminMenu</Filter>
-    </ClCompile>
-    <ClCompile Include="AdminUsers.cpp">
-      <Filter>AdminMenu</Filter>
-    </ClCompile>
-    <ClCompile Include="EditInventory.cpp">
-      <Filter>Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="EditUser.cpp">
-      <Filter>AdminMenu</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AdminMenu.h">
-      <Filter>AdminMenu</Filter>
-    </ClInclude>
-    <ClInclude Include="AdminUsers.h">
-      <Filter>AdminMenu</Filter>
-    </ClInclude>
-    <ClInclude Include="Dashboard.h" />
-    <ClInclude Include="EditInventory.h" />
-    <ClInclude Include="HistoryControll.h" />
-    <ClInclude Include="InventoryMenu.h" />
-    <ClInclude Include="MainLogin.h" />
-    <ClInclude Include="Menumain.h" />
-    <ClInclude Include="PopupEdit.h" />
-    <ClInclude Include="Register.h" />
-    <ClInclude Include="EditUser.h">
-      <Filter>AdminMenu</Filter>
-    </ClInclude>
-  </ItemGroup>
+  <!-- Visual folders -->
   <ItemGroup>
     <Filter Include="Methods">
       <UniqueIdentifier>{cae60aa4-76d6-4fca-9c94-a08449068cf9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AdminMenu">
+    <Filter Include="Pages">
       <UniqueIdentifier>{9a2d60c5-2f81-48f5-bf1a-5e2a97126fad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{9d01d3d4-b76f-4426-b713-598450c9278c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <!-- Source files (.cpp) -->
+  <ItemGroup>
+    <ClCompile Include="Methods\AdminMenu.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\AdminUsers.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\Dashboard.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\EditInventory.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\EditUser.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\HistoryControll.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\InventoryMenu.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\MainLogin.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\Menumain.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\PopupEdit.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Methods\Register.cpp">
+      <Filter>Methods</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <!-- Header files (.h) -->
+  <ItemGroup>
+    <ClInclude Include="Pages\AdminMenu.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\AdminUsers.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\Dashboard.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\EditInventory.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\EditUser.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\HistoryControll.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\InventoryMenu.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\MainLogin.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\Menumain.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\PopupEdit.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages\Register.h">
+      <Filter>Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="EnvConfig.h" />
+  </ItemGroup>
+  <!-- Resource files (.resx) -->
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\AdminMenu.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>AdminMenu.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\AdminUsers.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>AdminUsers.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Dashboard.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>Dashboard.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\EditInventory.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>EditInventory.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\EditUser.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>EditUser.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\HistoryControll.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>HistoryControll.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\InventoryMenu.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>InventoryMenu.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\MainLogin.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>MainLogin.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Menumain.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>Menumain.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\PopupEdit.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>PopupEdit.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Register.resx">
+      <Filter>Pages</Filter>
+      <DependentUpon>Register.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\MainLogin.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\EditInventory.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\AdminUsers.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\InventoryMenu.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\HistoryControll.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Menumain.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\PopupEdit.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\EditUser.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Dashboard.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Register.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\AdminMenu.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\AdminMenu.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Dashboard.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\EditInventory.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\EditUser.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\AdminUsers.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\MainLogin.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\InventoryMenu.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Menumain.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\PopupEdit.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Register.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\HistoryControll.resx">
+      <Filter>Pages</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".env" />
   </ItemGroup>
 </Project>

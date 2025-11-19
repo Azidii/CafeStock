@@ -1,5 +1,6 @@
 #pragma once
 #include "Dashboard.h"
+#include "../EnvConfig.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -17,7 +18,7 @@ namespace CafeStock {
 	public ref class Dashboard : public System::Windows::Forms::UserControl
 	{
 	private:
-		String^ connString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
+		String^ connString = CafeStockConfig::EnvConfig::GetConnectionString();
 
 	public:
 		Dashboard(String^ username, bool isAdmin)
@@ -347,30 +348,29 @@ private:
 	int GetUsedCapacity()
 	{
 		int usedCapacity = 0;
-
-		SqlConnection^ conn = gcnew SqlConnection(connString);
-
 		try
 		{
+			SqlConnection^ conn = gcnew SqlConnection(connString);
 			conn->Open();
-			String^ query = "SELECT SUM(Item_Quantity) FROM tblItems";
-			SqlCommand^ cmd = gcnew SqlCommand(query, conn);
 
+			SqlCommand^ cmd = gcnew SqlCommand("SELECT SUM(Item_Quantity) FROM dbo.tblItems", conn);
 			Object^ result = cmd->ExecuteScalar();
-			if (result != nullptr && result->ToString() != "")
+
+			if (result != nullptr && result != DBNull::Value)
+			{
 				usedCapacity = Convert::ToInt32(result);
+			}
+
+			conn->Close();
 		}
 		catch (Exception^ ex)
 		{
 			MessageBox::Show("Error: " + ex->Message);
 		}
-		finally
-		{
-			conn->Close();
-		}
 
 		return usedCapacity;
 	}
+
 
 	void LoadUserCount()
 	{
@@ -387,7 +387,7 @@ private:
 		try
 		{
 			conn->Open();
-			String^ query = "SELECT COUNT(*) FROM Users"; // Replace with your actual user table name
+			String^ query = "SELECT COUNT(*) FROM dbo.Users"; // Replace with your actual user table name
 			SqlCommand^ cmd = gcnew SqlCommand(query, conn);
 
 			Object^ result = cmd->ExecuteScalar();

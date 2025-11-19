@@ -2,20 +2,26 @@
 #include "Menumain.h"
 #include "AdminMenu.h"
 #include "Register.h"
+#include "../EnvConfig.h"
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Data::SqlClient;
 
-[STAThread] 
-int main(array<String^>^ args) { 
-    Application::EnableVisualStyles();
-    Application::SetCompatibleTextRenderingDefault(false);
-
-
-    Application::Run(gcnew CafeStock::MainLogin());
-
-    return 0;  
+[STAThread]
+int main(array<String^>^ args)
+{
+    try
+    {
+        CafeStock::MainLogin^ form = gcnew CafeStock::MainLogin();
+        Application::Run(form);
+    }
+    catch (Exception^ ex)
+    {
+        MessageBox::Show(ex->Message, "Startup Error",
+            MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
+	return 0;
 }
 
 System::Void CafeStock::MainLogin::bttnLogin_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -47,13 +53,14 @@ System::Void CafeStock::MainLogin::bttnLogin_Click(System::Object^ sender, Syste
         return;
     }
 
-    System::String^ connString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
+    System::String^ connString = CafeStockConfig::EnvConfig::GetConnectionString();
+
 
     try {
         SqlConnection^ connection = gcnew SqlConnection(connString);
         connection->Open();
 
-        SqlCommand^ command = gcnew SqlCommand("SELECT COUNT(*) FROM Users WHERE username = @username AND password = @password", connection);
+        SqlCommand^ command = gcnew SqlCommand("SELECT COUNT(*) FROM dbo.Users WHERE username = @username AND password = @password", connection);
         command->Parameters->AddWithValue("@username", username);
         command->Parameters->AddWithValue("@password", password);
         int userCount = safe_cast<int>(command->ExecuteScalar());

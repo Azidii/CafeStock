@@ -1,5 +1,6 @@
 ﻿#include "Register.h"
 #include "MainLogin.h"
+#include "../EnvConfig.h"
 using namespace System;
 using namespace System::Data;
 using namespace System::Data::SqlClient;
@@ -13,7 +14,8 @@ System::Void CafeStock::Register::lblRegis_Click(System::Object^ sender, System:
 }
 
 System::Void CafeStock::Register::button1_Click(System::Object^ sender, System::EventArgs^ e) {
-    System::String^ connString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
+    System::String^ connString = CafeStockConfig::EnvConfig::GetConnectionString();
+
     System::String^ username = txtUsername->Text;
     System::String^ password = txtPassword->Text;
     System::String^ confirmPassword = txtConfirmPass->Text;
@@ -45,7 +47,7 @@ System::Void CafeStock::Register::button1_Click(System::Object^ sender, System::
         SqlConnection^ connection = gcnew SqlConnection(connString);
         connection->Open();
 
-        SqlCommand^ checkUserCmd = gcnew SqlCommand("SELECT COUNT(*) FROM Users WHERE username = @username", connection);
+        SqlCommand^ checkUserCmd = gcnew SqlCommand("SELECT COUNT(*) FROM dbo.Users WHERE username = @username", connection);
         checkUserCmd->Parameters->AddWithValue("@username", username);
         int userCount = safe_cast<int>(checkUserCmd->ExecuteScalar());
 

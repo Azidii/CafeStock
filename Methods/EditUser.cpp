@@ -1,5 +1,6 @@
 ﻿#include "EditUser.h"
 #include "AdminUsers.h"
+#include "../EnvConfig.h"
 
 using namespace System::Data::SqlClient;
 
@@ -25,7 +26,7 @@ System::Void CafeStock::EditUser::btnSave_Click(System::Object^ sender, System::
     }
 
     // Database connection
-    String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
+    String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
 
     try {
         SqlConnection^ conn = gcnew SqlConnection(connectionString);

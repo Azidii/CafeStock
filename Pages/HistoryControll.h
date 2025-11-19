@@ -1,4 +1,5 @@
 #pragma once
+#include "../EnvConfig.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -200,10 +201,16 @@ namespace CafeStock {
 	private:
 		public:
 			void LoadDataFromDatabase() {
-				String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
-				String^ query = "SELECT * FROM tblItems";
+				String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
+				String^ query = "SELECT * FROM dbo.tblItems";
 
 				try {
+					// Confirm connection string exists
+					if (String::IsNullOrEmpty(connectionString)) {
+						MessageBox::Show("Connection string is null or empty.");
+						return;
+					}
+
 					// Ensure DataGridView is initialized
 					if (dataGridView1 == nullptr) {
 						MessageBox::Show("DataGridView is not initialized.");
@@ -213,27 +220,39 @@ namespace CafeStock {
 					// Connect to the database
 					SqlConnection^ con = gcnew SqlConnection(connectionString);
 					con->Open();
+
 					SqlDataAdapter^ adapter = gcnew SqlDataAdapter(query, con);
 					DataTable^ dt = gcnew DataTable();
 					adapter->Fill(dt);
+
+					if (dt == nullptr || dt->Columns->Count == 0) {
+						MessageBox::Show("No data found or DataTable is empty.");
+						con->Close();
+						return;
+					}
+
 					dataTable = dt;
 					dataGridView1->DataSource = dataTable->DefaultView;
+
 					con->Close();
 
-					if (dataGridView1->Columns->Contains("Item_Name")) {
+					// Apply column header safely only if column exists
+					if (dataGridView1->Columns->Contains("Item_Name"))
 						dataGridView1->Columns["Item_Name"]->HeaderText = "Item Name";
-					}
-					if (dataGridView1->Columns->Contains("Item_Category")) {
-						dataGridView1->Columns["Item_Category"]->HeaderText = "Item Type";
-					}
-					if (dataGridView1->Columns->Contains("Item_Quantity")) {
-						dataGridView1->Columns["Item_Quantity"]->HeaderText = "Quantity";
-					}
-					if (dataGridView1->Columns->Contains("Date_Modified")) {
-						dataGridView1->Columns["Date_Modified"]->HeaderText = "Date Created/Modified";
-					}
 
-					dataGridView1->Columns["Item_ID"]->Visible = false;
+					if (dataGridView1->Columns->Contains("Item_Category"))
+						dataGridView1->Columns["Item_Category"]->HeaderText = "Item Type";
+
+					if (dataGridView1->Columns->Contains("Item_Quantity"))
+						dataGridView1->Columns["Item_Quantity"]->HeaderText = "Quantity";
+
+					if (dataGridView1->Columns->Contains("Date_Modified"))
+						dataGridView1->Columns["Date_Modified"]->HeaderText = "Date Created/Modified";
+
+					if (dataGridView1->Columns->Contains("Item_ID"))
+						dataGridView1->Columns["Item_ID"]->Visible = false;
+
+					// Styling, safe since grid now has columns
 					dataGridView1->EnableHeadersVisualStyles = false;
 					dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::Silver;
 					dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::Black;
@@ -241,7 +260,6 @@ namespace CafeStock {
 					dataGridView1->ColumnHeadersDefaultCellStyle->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
 					dataGridView1->ColumnHeadersDefaultCellStyle->SelectionBackColor = System::Drawing::Color::Silver;
 					dataGridView1->ColumnHeadersDefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
-
 				}
 				catch (SqlException^ ex) {
 					MessageBox::Show("Database error: " + ex->Message);
@@ -280,30 +298,39 @@ private: System::Void bttnMinimize_Click(System::Object^ sender, System::EventAr
 		parentForm->WindowState = System::Windows::Forms::FormWindowState::Minimized;
 	}
 }
-private: System::Void dataGridView1_CellFormatting(System::Object^ sender, System::Windows::Forms::DataGridViewCellFormattingEventArgs^ e) {
-	// Ensure it's not a header row and within the "Item_Quantity" column
-	if (e->RowIndex >= 0 && dataGridView1->Columns[e->ColumnIndex]->Name == "Item_Quantity") {
-		System::String^ value = dataGridView1->Rows[e->RowIndex]->Cells["Item_Quantity"]->Value != nullptr
-			? dataGridView1->Rows[e->RowIndex]->Cells["Item_Quantity"]->Value->ToString()
-			: "";
+private: System::Void dataGridView1_CellFormatting(System::Object^ sender,
+	System::Windows::Forms::DataGridViewCellFormattingEventArgs^ e)
+{
+	// Ensure we are on the Item_Quantity column
+	if (dataGridView1->Columns[e->ColumnIndex]->HeaderText == "Quantity")
+	{
+		// Get the cell value
+		System::String^ valueStr = e->Value != nullptr ? e->Value->ToString() : "";
 
-		int quantity;
-		// Check if quantity is zero
-		if (!String::IsNullOrEmpty(value) && Int32::TryParse(value, quantity) && quantity <= 1500) {
-			dataGridView1->Rows[e->RowIndex]->DefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(198, 12, 48);
-			dataGridView1->Rows[e->RowIndex]->DefaultCellStyle->ForeColor = System::Drawing::Color::White; 
-		}
-		else if (!String::IsNullOrEmpty(value) && Int32::TryParse(value, quantity) && quantity <= 2500) {
-			dataGridView1->Rows[e->RowIndex]->DefaultCellStyle->BackColor = System::Drawing::Color::Orange;
-			dataGridView1->Rows[e->RowIndex]->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
-		}
-		else {
-			// Reset style if not zero
-			dataGridView1->Rows[e->RowIndex]->DefaultCellStyle->BackColor = System::Drawing::Color::White;
-			dataGridView1->Rows[e->RowIndex]->DefaultCellStyle->ForeColor = System::Drawing::Color::Black;
+		int quantity = 0;
+		bool success = Int32::TryParse(valueStr, quantity);
+
+		if (success)
+		{
+			if (quantity <= 1500)
+			{
+				e->CellStyle->BackColor = System::Drawing::Color::FromArgb(198, 12, 48);
+				e->CellStyle->ForeColor = System::Drawing::Color::White;
+			}
+			else if (quantity > 1500 && quantity <= 2500)
+			{
+				e->CellStyle->BackColor = System::Drawing::Color::Orange;
+				e->CellStyle->ForeColor = System::Drawing::Color::White;
+			}
+			else
+			{
+				e->CellStyle->BackColor = System::Drawing::Color::White;
+				e->CellStyle->ForeColor = System::Drawing::Color::Black;
+			}
 		}
 	}
 }
+
 private: System::Void HistoryControll_Load(System::Object^ sender, System::EventArgs^ e) {
 	dataGridView1->ClearSelection();
 	dataGridView1->CurrentCell = nullptr;

@@ -1,13 +1,14 @@
 ﻿#include "EditInventory.h"
 #include "InventoryMenu.h"
 #include "Menumain.h"
+#include "../EnvConfig.h"
 
 using namespace System::Data::SqlClient;
 
 int CafeStock::EditInventory::GetItemID(String^ itemName) {
     int itemID = -1; // Default value if not found
-    String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
-    String^ query = "SELECT Item_ID FROM tblItems WHERE Item_Name = @ItemName";
+    String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
+    String^ query = "SELECT Item_ID FROM dbo.tblItems WHERE Item_Name = @ItemName";
 
     try {
         // Open connection
@@ -79,14 +80,14 @@ System::Void CafeStock::EditInventory::btnSave_Click(System::Object^ sender, Sys
         return;
     }
 
-    String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
+    String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
 
     try {
         SqlConnection^ conn = gcnew SqlConnection(connectionString);
         conn->Open();
 
         // ✅ Calculate the current total quantity excluding the quantity of the item being updated
-        String^ totalQuery = "SELECT SUM(Item_Quantity) FROM tblItems WHERE Item_ID != @ItemID";
+        String^ totalQuery = "SELECT SUM(Item_Quantity) FROM dbo.tblItems WHERE Item_ID != @ItemID";
         SqlCommand^ totalCmd = gcnew SqlCommand(totalQuery, conn);
         totalCmd->Parameters->AddWithValue("@ItemID", this->itemID);
 
@@ -102,7 +103,7 @@ System::Void CafeStock::EditInventory::btnSave_Click(System::Object^ sender, Sys
         }
 
         // ✅ Proceed with the update if within capacity
-        String^ query = "UPDATE tblItems SET Item_Name = @ItemName, Item_Category = @ItemType, Item_Quantity = @ItemQuantity WHERE Item_ID = @ItemID";
+        String^ query = "UPDATE dbo.tblItems SET Item_Name = @ItemName, Item_Category = @ItemType, Item_Quantity = @ItemQuantity WHERE Item_ID = @ItemID";
         SqlCommand^ cmd = gcnew SqlCommand(query, conn);
         cmd->Parameters->AddWithValue("@ItemName", itemName);
         cmd->Parameters->AddWithValue("@ItemType", itemType);
@@ -143,9 +144,9 @@ System::Void CafeStock::EditInventory::btnSave_Click(System::Object^ sender, Sys
 }
 
 void CafeStock::EditInventory::LoadItemDetails() {
-    String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
+    String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
 
-    String^ query = "SELECT Item_Name, Item_Category, Item_Quantity FROM tblItems WHERE Item_ID = @ItemID";
+    String^ query = "SELECT Item_Name, Item_Category, Item_Quantity FROM dbo.tblItems WHERE Item_ID = @ItemID";
 
     try {
         SqlConnection^ conn = gcnew SqlConnection(connectionString);

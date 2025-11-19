@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "EditUser.h"
+#include "../EnvConfig.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -221,34 +222,46 @@ namespace CafeStock {
 #pragma endregion
 public:
 	void LoadDataFromDatabase() {
-		String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
-		String^ query = "SELECT * FROM Users";
-		String^ countQuery = "SELECT COUNT(*) FROM Users";
+		String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
+		String^ query = "SELECT * FROM dbo.Users";
+		String^ countQuery = "SELECT COUNT(*) FROM dbo.Users";
 
 		try {
 			SqlConnection^ con = gcnew SqlConnection(connectionString);
 			con->Open();
 
-			
 			SqlCommand^ countCmd = gcnew SqlCommand(countQuery, con);
 			int userCount = Convert::ToInt32(countCmd->ExecuteScalar());
-			lblUserCount->Text = "User Count: " + userCount.ToString();  
 
-			
+			if (lblUserCount == nullptr) {
+				MessageBox::Show("Label 'lblUserCount' is not initialized.");
+				return;
+			}
+			lblUserCount->Text = "User Count: " + userCount.ToString();
+
 			SqlDataAdapter^ adapter = gcnew SqlDataAdapter(query, con);
 			DataTable^ dt = gcnew DataTable();
 			adapter->Fill(dt);
 			dataTable = dt;
+
+			if (dataGridView1 == nullptr) {
+				MessageBox::Show("DataGridView 'dataGridView1' is not initialized.");
+				return;
+			}
+
 			dataGridView1->DataSource = dataTable->DefaultView;
 
-			con->Close();
+			// Verify columns exist before changing headers
+			if (dt->Columns->Contains("Id"))
+				dataGridView1->Columns["Id"]->HeaderText = "User ID";
+			if (dt->Columns->Contains("username"))
+				dataGridView1->Columns["username"]->HeaderText = "User Name";
+			if (dt->Columns->Contains("password"))
+				dataGridView1->Columns["password"]->HeaderText = "Password";
+			if (dt->Columns->Contains("datecreated"))
+				dataGridView1->Columns["datecreated"]->HeaderText = "Date Created";
 
-			dataGridView1->Columns["Id"]->HeaderText = "User ID";
-			dataGridView1->Columns["username"]->HeaderText = "User Name";
-			dataGridView1->Columns["password"]->HeaderText = "Password";
-			dataGridView1->Columns["datecreated"]->HeaderText = "Date Created";
-
-
+			// Styling
 			dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::Silver;
 			dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::Black;
 			dataGridView1->ColumnHeadersDefaultCellStyle->Font = gcnew System::Drawing::Font("Arial", 8, System::Drawing::FontStyle::Bold);
@@ -256,11 +269,14 @@ public:
 			dataGridView1->ColumnHeadersDefaultCellStyle->SelectionBackColor = System::Drawing::Color::Silver;
 			dataGridView1->ColumnHeadersDefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
 			dataGridView1->EnableHeadersVisualStyles = false;
+
+			con->Close();
 		}
 		catch (Exception^ ex) {
 			MessageBox::Show("Error loading data: " + ex->Message);
 		}
 	}
+
 private: System::Void bttnExit_Click(System::Object^ sender, System::EventArgs^ e) {
 	System::Windows::Forms::DialogResult result =
 		System::Windows::Forms::MessageBox::Show(
@@ -336,12 +352,12 @@ private: System::Void txtRemoveUsers_Click(System::Object^ sender, System::Event
 	if (dialogResult == System::Windows::Forms::DialogResult::Yes) {
 		try {
 			// Database connection
-			String^ connectionString = "Data Source=cafestock.c5cmiu400v99.ap-northeast-2.rds.amazonaws.com;Initial Catalog=dboInventory;User ID=sa;Password=CafeStock1234";
+			String^ connectionString = CafeStockConfig::EnvConfig::GetConnectionString();
 			SqlConnection^ conn = gcnew SqlConnection(connectionString);
 			conn->Open();
 
 			// Delete query
-			String^ deleteQuery = "DELETE FROM Users WHERE Id = @UserID";
+			String^ deleteQuery = "DELETE FROM dbo.Users WHERE Id = @UserID";
 			SqlCommand^ cmd = gcnew SqlCommand(deleteQuery, conn);
 			cmd->Parameters->AddWithValue("@UserID", userID);
 			int rowsAffected = cmd->ExecuteNonQuery();

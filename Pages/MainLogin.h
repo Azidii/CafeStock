@@ -304,11 +304,11 @@ namespace CafeStock {
 			// 
 			this->lblPassword->AutoSize = true;
 			this->lblPassword->BackColor = System::Drawing::Color::Transparent;
-			this->lblPassword->Font = (gcnew System::Drawing::Font(L"Segoe MDL2 Assets", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->lblPassword->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblPassword->Location = System::Drawing::Point(126, 265);
+			this->lblPassword->Location = System::Drawing::Point(143, 268);
 			this->lblPassword->Name = L"lblPassword";
-			this->lblPassword->Size = System::Drawing::Size(85, 21);
+			this->lblPassword->Size = System::Drawing::Size(82, 21);
 			this->lblPassword->TabIndex = 3;
 			this->lblPassword->Text = L"Password";
 			// 
@@ -316,9 +316,9 @@ namespace CafeStock {
 			// 
 			this->lblUsername->AutoSize = true;
 			this->lblUsername->BackColor = System::Drawing::Color::Transparent;
-			this->lblUsername->Font = (gcnew System::Drawing::Font(L"Segoe MDL2 Assets", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->lblUsername->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblUsername->Location = System::Drawing::Point(126, 189);
+			this->lblUsername->Location = System::Drawing::Point(141, 192);
 			this->lblUsername->Name = L"lblUsername";
 			this->lblUsername->Size = System::Drawing::Size(87, 21);
 			this->lblUsername->TabIndex = 2;
